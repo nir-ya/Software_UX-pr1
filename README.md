@@ -1,2 +1,2 @@
 # PingPong Table App 
-Project 1 in Software and UX workshop - Ping Pong game reservation app
+This Branch is responsible for the saved turn button and the start up page for login
