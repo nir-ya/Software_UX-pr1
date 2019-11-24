@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edit_turn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/myturnfragimg">
+
+
+    <TextView
+        android:id="@+id/turnPreTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="45dp"
+        android:fontFamily="@font/alef_bold"
+        android:text="Your turn is at:"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/myTurnTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="45dp"
+        android:fontFamily="@font/alef_bold"
+        android:text="No turn set yet!"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/savedTurnBtn"
+            android:layout_width="140dp"
+            android:layout_height="36dp"
+            android:background="@drawable/savebtnimg"
+            android:fontFamily="@font/alef_bold"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="146dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/savedTurnBtn"
+            android:background="@drawable/cancelbtnimg"
+            android:fontFamily="@font/alef_bold"
+            android:text="Cancel" />
+    </RelativeLayout>
+
+
+</LinearLayout>

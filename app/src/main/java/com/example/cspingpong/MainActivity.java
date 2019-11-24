@@ -1,12 +1,18 @@
 package com.example.cspingpong;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -30,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private String[] slotIntervalsSuffix = new String[GAMES_PER_HOUR];
 
     private NumberPicker hourPicker;
-
     private NameDialog nameDialog;
+    private Dialog myTurnDialog;
     private String username;
-
     private TextView welcomePlayerTxt;
+    private Button myTurnBtn;
 
 
     @Override
@@ -58,8 +64,51 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         nameDialog = NameDialog.newInstance("Some Title");
         nameDialog.show(fm, "fragment_edit_name");
+
+        //todo - responsible for opening the saved turn button
+        myTurnBtn = findViewById(R.id.savedTurnBtn);
+        myTurnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMyTurnDialog();
+            }
+        });
+
     }
 
+    /**
+     * opens a new Dialog represents the user saved turn
+     */
+    //todo - maybe to export this dialog to a class - MyTurnDialog
+    public void openMyTurnDialog() {
+        myTurnDialog = new Dialog(MainActivity.this);
+        View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.my_turn_fragment, null);
+        final TextView myTurnTxt = view.findViewById(R.id.myTurnTxt);
+        final TextView turnPreTxt = view.findViewById(R.id.turnPreTxt);
+        Button saveBtn =  view.findViewById(R.id.savedTurnBtn);
+        final Button cancelBtn =  view.findViewById(R.id.cancelBtn);
+        turnPreTxt.setText(username + ",your turn is at:");
+        myTurnDialog.setContentView(view);
+        myTurnDialog.show();
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myTurnDialog.cancel();
+            }
+        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                turnPreTxt.setText("");
+                if(myTurnTxt.getText().equals("No turn set yet!")) {
+                    myTurnTxt.setText("No turn to cancel");
+                }
+                else {
+                    myTurnTxt.setText("Your turn was canceled!");
+                }
+            }
+        });
+    }
 
     /**
      * time picker on value changed listener
