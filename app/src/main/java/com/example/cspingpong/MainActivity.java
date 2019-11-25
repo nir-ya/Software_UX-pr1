@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.github.florent37.expansionpanel.ExpansionHeader;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private String[] slotIntervalsSuffix = new String[GAMES_PER_HOUR];
 
     private NumberPicker hourPicker;
+
+
+    // used for requesting name from user
+
     private NameDialog nameDialog;
     private Dialog myTurnDialog;
     private String username;
@@ -59,10 +65,13 @@ public class MainActivity extends AppCompatActivity {
 
         setHourPickerListener();
 
+
+        setHourPickerDefault();
+
         updateHeaderColors();
 
         FragmentManager fm = getSupportFragmentManager();
-        nameDialog = NameDialog.newInstance("Some Title");
+        nameDialog = NameDialog.newInstance("Welcome!");
         nameDialog.show(fm, "fragment_edit_name");
 
         //todo - responsible for opening the saved turn button
@@ -109,6 +118,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+=======
+     * set time picker default value to current time
+     */
+    private void setHourPickerDefault() {
+        Calendar cal = Calendar.getInstance();
+        int currentHour = cal.get(Calendar.HOUR_OF_DAY);
+        hourPicker.setValue(currentHour);
+
+        // fixes default hour being invisible
+        View firstItem = hourPicker.getChildAt(0);
+        if (firstItem != null) {
+            firstItem.setVisibility(View.INVISIBLE);
+        }
+        setHeaderTime();
+    }
+
+
 
     /**
      * time picker on value changed listener
@@ -118,15 +144,19 @@ public class MainActivity extends AppCompatActivity {
         hourPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                int pickedHour = hourPicker.getValue();
-
-                for (int i = 0; i < GAMES_PER_HOUR; i++) {
-                    headerTexts[i].setText(pickedHour + slotIntervalsSuffix[i]);
-                }
-
-                updateHeaderColors();
+                setHeaderTime();
             }
         });
+    }
+
+    private void setHeaderTime() {
+        int pickedHour = hourPicker.getValue();
+
+        for (int i = 0; i < GAMES_PER_HOUR; i++) {
+            headerTexts[i].setText(pickedHour + slotIntervalsSuffix[i]);
+        }
+
+        updateHeaderColors();
     }
 
 
@@ -164,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             switch (games.get(i).empty_slots()) {
                 case 0:
                     slotHeaders[i].setBackgroundTintList(
-                            ContextCompat.getColorStateList(getApplicationContext(), R.color.gray));
+                            ContextCompat.getColorStateList(getApplicationContext(), R.color.button_gray));
                     slotHeaders[i].setClickable(false);
                     break;
                 case 1:
@@ -221,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
         server.addPlayer(22122019, time, username);
         updateHeaderColors();
 
-        String message = "Hi " + username + ", You chose to play in " + 22122019 + " at " + sTime;
+        String message = "You chose to play in " + 22122019 + " at " + sTime;
         Toast gameInfo = Toast.makeText(this, message, Toast.LENGTH_LONG);
         gameInfo.show();
     }
@@ -231,13 +261,12 @@ public class MainActivity extends AppCompatActivity {
         EditText tx = nameDialog.mEditText;
         username = tx.getText().toString();
 
-        nameDialog.dismiss();
+        if (username.length() == 0) {
+            tx.getBackground().setTint(Color.RED);
+        } else {
+            nameDialog.dismiss();
 
-        Toast toast = Toast.makeText(getApplicationContext(), "Hello " + username, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-
-        toast.show();
-
-        welcomePlayerTxt.setText("Welcome " + username + "!");
+            welcomePlayerTxt.setText("Welcome " + username + "!");
+        }
     }
 }
