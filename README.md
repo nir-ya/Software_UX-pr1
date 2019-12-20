@@ -17,4 +17,3 @@ With CS-PingPong™ you can view a complete list of all your future games - so y
 Join and leave games with a flick of a finger.
 
 Forget eveything you know about Ping Pong. Embrace technology. Embrace progress. Embrace CS-PingPong™.
-</p>
