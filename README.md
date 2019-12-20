@@ -1,10 +1,10 @@
 # PingPong Table App 
 Project 1 in Software and UX workshop - Ping Pong game reservation app
 
-Developers' names:
+<ins>Developers' names:</ins>
 Avner Duchovni, Eyal Diskin, Ran Hadar, Liav Alter, Nir Yazdi.
 
-Designer's name: Yoni Hauser.
+<ins>Designer's name:</ins> Yoni Hauser.
 
 <ins>About the App:</ins>  
 CS-PingPong™ is a revolution in everything regarding the way students in Givat Ram play Ping Pong at campus. 
