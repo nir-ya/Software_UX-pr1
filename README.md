@@ -6,7 +6,7 @@ Avner Duchovni, Eyal Diskin, Ran Hadar, Liav Alter, Nir Yazdi.
 
 Designer's name: Yoni Hauser.
 
-<u>About the App:</u>
+<p><u>About the App:</u>
 
 CS-PingPong™ is a revolution in everything regarding the way students in Givat Ram play Ping Pong at campus. 
 No longer the long waits, no longer disputes over who's up next, no longer PingPong Bullies™!
@@ -17,3 +17,4 @@ With CS-PingPong™ you can view a complete list of all your future games - so y
 Join and leave games with a flick of a finger.
 
 Forget eveything you know about Ping Pong. Embrace technology. Embrace progress. Embrace CS-PingPong™.
+</p>
