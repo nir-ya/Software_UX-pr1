@@ -1,5 +1,5 @@
 # PingPong Table App 
-Project 1 in Software and UX workshop - Ping Pong game reservation app
+Project 1 in HUJI Software and UX workshop - Ping Pong game reservation app
 
 <ins>Developers' names:</ins>
 Avner Duchovni, Eyal Diskin, Ran Hadar, Liav Alter, Nir Yazdi.
